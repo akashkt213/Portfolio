@@ -2,20 +2,28 @@ import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { a } from "@react-spring/three";
 import skyScene from "../assets/Sky.glb";
+import { useFrame } from "@react-three/fiber";
 
-const Sky = (props) => {
+const Sky = ({ isRotating, ...props }) => {
   const { nodes, materials } = useGLTF(skyScene);
+  const skyRef = useRef();
+
+  useFrame((_,delta)=>{
+    if(isRotating){
+      skyRef.current.rotation.y +=0.1 * delta;
+    }
+  })
   return (
-    <a.group {...props} dispose={null}>
-      {/* <mesh
+    <a.group ref={skyRef} {...props} dispose={null}>
+      <mesh
         castShadow
         receiveShadow
         geometry={nodes.Object_4.geometry}
         material={materials.moon}
-        position={[-1.589, -0.597, 0.3]}
+        position={[-7, 3, 0]}
         rotation={[0, 0, 0.475]}
-        scale={[2.641, 3.018, 2.641]}
-      /> */}
+        scale={[0.8, 0.8, 0.08]}
+      />
       {/* <mesh
         castShadow
         receiveShadow
@@ -55,7 +63,7 @@ const Sky = (props) => {
         receiveShadow
         geometry={nodes.Object_14.geometry}
         material={materials.nuven}
-        position={[2.779, -0.948, -3.138]}
+        position={[6, 4, -3.138]}
         rotation={[Math.PI / 2, 0, 0]}
         scale={[-1.809, 1.436, 1.436]}
       />
@@ -73,7 +81,7 @@ const Sky = (props) => {
         receiveShadow
         geometry={nodes.Object_18.geometry}
         material={materials.nuven}
-        position={[-3.279, 0.643, -0.481]}
+        position={[-3.279, 2, -0.481]}
         rotation={[Math.PI / 2, 0, 0]}
         scale={[-1.753, 1.436, 1.436]}
       />

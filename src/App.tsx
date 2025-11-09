@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router";
 import Header from "./components/Header";
-import { Home } from "./pages/Home";
 import { About } from "./pages/About";
 import { Contact } from "./pages/Contact";
 import { Blogs } from "./pages/Blogs";
@@ -11,11 +10,11 @@ function App() {
     <>
       <Header />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<NewHome />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/blogs" element={<Blogs />} />
-        <Route path="/island" element={<NewHome />} />
+        {/* <Route path="/island" element={<NewHome />} /> */}
       </Routes>
     </>
   );
