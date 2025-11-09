@@ -15,7 +15,7 @@ const HomeInfo = ({ currentStage }: { currentStage: Number }) => {
         title="My Skills 💡"
         description="I specialize in React, TypeScript, and Node.js with strong experience in UI development and API integration."
         linkText="View Skills →"
-        linkTo="/skills"
+        linkTo="/about"
       />
     ),
     3: (

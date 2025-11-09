@@ -1,6 +1,7 @@
 import HomeInfo from "@/components/HomeInfo";
+import Bird from "@/models/Bird";
+import Fox from "@/models/Fox";
 import Island from "@/models/Island";
-import Sky from "@/models/Sky";
 import { Canvas } from "@react-three/fiber";
 import { Suspense, useState } from "react";
 const NewHome = () => {
@@ -24,12 +25,10 @@ const NewHome = () => {
   const [islandScale, islandPosition, islandRotation] =
     adjustIslandForScreenSize();
 
-  console.log('currentStage:', currentStage)
-
   return (
     <section className="w-full h-screen relative bg-black">
       <div className="absolute top-28 left-0 right-0 z-10 flex items-center justify-center">
-        {currentStage && <HomeInfo currentStage={currentStage}/>}
+        {currentStage && <HomeInfo currentStage={currentStage} />}
       </div>
       <Canvas
         className={`w-full h-screen bg-transparent ${
@@ -41,10 +40,7 @@ const NewHome = () => {
           <directionalLight position={[1, 0, 0.3]} intensity={2} />
           <ambientLight intensity={1} />
           <directionalLight position={[10, 10, 5]} />
-          <hemisphereLight
-            groundColor="#000000"
-            intensity={1}
-          />
+          <hemisphereLight groundColor="#000000" intensity={1} />
           <Island
             position={islandPosition}
             scale={islandScale}
@@ -53,7 +49,9 @@ const NewHome = () => {
             setIsRotating={setIsRotating}
             setCurrentStage={setCurrentStage}
           />
-          {/* <Sky isRotating={isRotating}/> */}
+          <Bird />
+          {/* <Stag /> */}
+          <Fox/>
         </Suspense>
       </Canvas>
     </section>
