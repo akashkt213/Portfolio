@@ -34,15 +34,15 @@ export default function LandingPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto mb-16">
           {/* About Card */}
           <Card 
-            className="bg-black/40 backdrop-blur-sm border-gray-800 hover:border-gray-700 transition-all cursor-pointer"
+            className="bg-black/40 backdrop-blur-sm border-gray-800 hover:border-gray-700 transition-all cursor-pointer group"
             onClick={() => navigate('/about')}
           >
             <CardContent className="p-6 relative overflow-hidden">
               <div className="flex items-start justify-between">
                 <div className="flex-1">
-                  <User className="w-8 h-8 mb-4" />
-                  <h2 className="text-3xl font-bold mb-2">About</h2>
-                  <p className="text-gray-400">A bit about myself.</p>
+                  <User className="w-8 h-8 mb-4 transition-colors group-hover:text-[#ffe0c2]" />
+                  <h2 className="text-3xl font-bold mb-2 transition-transform group-hover:scale-98">About</h2>
+                  <p className="text-gray-400 transition-transform group-hover:scale-98">A bit about myself.</p>
                 </div>
                 <div className="absolute right-0 top-0 w-32 h-32 opacity-20">
                   <div className="w-full h-full bg-gradient-to-br from-blue-400 to-purple-400 rounded-full blur-2xl"></div>
@@ -53,15 +53,15 @@ export default function LandingPage() {
 
           {/* Work Experience Card */}
           <Card 
-            className="bg-black/40 backdrop-blur-sm border-gray-800 hover:border-gray-700 transition-all cursor-pointer"
+            className="bg-black/40 backdrop-blur-sm border-gray-800 hover:border-gray-700 transition-all cursor-pointer group"
             onClick={() => navigate('/experience')}
           >
             <CardContent className="p-6 relative overflow-hidden">
               <div className="flex items-start justify-between">
                 <div className="flex-1">
-                  <Briefcase className="w-8 h-8 mb-4" />
-                  <h2 className="text-3xl font-bold mb-2">Work Experience</h2>
-                  <p className="text-gray-400">My career as a Software Engineer.</p>
+                  <Briefcase className="w-8 h-8 mb-4 transition-colors group-hover:text-[#ffe0c2]" />
+                  <h2 className="text-3xl font-bold mb-2 transition-transform group-hover:scale-98">Work Experience</h2>
+                  <p className="text-gray-400 transition-transform group-hover:scale-98">My career as a Software Engineer.</p>
                 </div>
                 <div className="absolute right-0 top-0 w-32 h-32 opacity-20">
                   <div className="w-full h-full bg-gradient-to-br from-gray-400 to-gray-600 rounded-full blur-2xl"></div>
@@ -72,15 +72,15 @@ export default function LandingPage() {
 
           {/* Projects Card */}
           <Card 
-            className="bg-black/40 backdrop-blur-sm border-gray-800 hover:border-gray-700 transition-all cursor-pointer"
+            className="bg-black/40 backdrop-blur-sm border-gray-800 hover:border-gray-700 transition-all cursor-pointer group"
             onClick={() => navigate('/projects')}
           >
             <CardContent className="p-6 relative overflow-hidden">
               <div className="flex items-start justify-between">
                 <div className="flex-1">
-                  <FolderOpen className="w-8 h-8 mb-4" />
-                  <h2 className="text-3xl font-bold mb-2">Projects</h2>
-                  <p className="text-gray-400">Personal projects I've been working on.</p>
+                  <FolderOpen className="w-8 h-8 mb-4 transition-colors group-hover:text-[#ffe0c2]" />
+                  <h2 className="text-3xl font-bold mb-2 transition-transform group-hover:scale-98">Projects</h2>
+                  <p className="text-gray-400 transition-transform group-hover:scale-98">Personal projects I've been working on.</p>
                   {/* <div className="flex gap-2 mt-4">
                     <div className="w-8 h-8 bg-purple-500/20 border border-purple-500 rounded flex items-center justify-center">
                       <span className="text-xs">🐴</span>
@@ -99,15 +99,15 @@ export default function LandingPage() {
 
           {/* Contact Card */}
           <Card 
-            className="bg-black/40 backdrop-blur-sm border-gray-800 hover:border-gray-700 transition-all cursor-pointer"
+            className="bg-black/40 backdrop-blur-sm border-gray-800 hover:border-gray-700 transition-all cursor-pointer group"
             onClick={() => navigate('/contact')}
           >
             <CardContent className="p-6 relative overflow-hidden">
               <div className="flex items-start justify-between">
                 <div className="flex-1">
-                  <Send className="w-8 h-8 mb-4" />
-                  <h2 className="text-3xl font-bold mb-2">Contact</h2>
-                  <p className="text-gray-400">Email, LinkedIn, carrier pigeon...</p>
+                  <Send className="w-8 h-8 mb-4 transition-colors group-hover:text-[#ffe0c2]" />
+                  <h2 className="text-3xl font-bold mb-2 transition-transform group-hover:scale-98">Contact</h2>
+                  <p className="text-gray-400 transition-transform group-hover:scale-98">Email, LinkedIn, carrier pigeon...</p>
                 </div>
                 <div className="absolute right-0 top-0 w-32 h-32 opacity-20">
                   <div className="flex gap-1">

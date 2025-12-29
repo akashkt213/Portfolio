@@ -1,13 +1,6 @@
-import { 
-  User,
-  GraduationCap,
-  Home,
-  Briefcase,
-  Send
-} from "lucide-react"
-import { useNavigate, useLocation } from "react-router-dom"
 import StarryBackground from "@/components/StarryBackground"
 import PageHeader from "@/components/PageHeader"
+import SidebarNav from "@/components/SidebarNav"
 
 interface Experience {
   id: number
@@ -19,9 +12,6 @@ interface Experience {
 }
 
 export default function ExperiencePage() {
-  const navigate = useNavigate()
-  const location = useLocation()
-
   const experiences: Experience[] = [
     {
       id: 1,
@@ -47,14 +37,6 @@ export default function ExperiencePage() {
     }
   ]
 
-  const navItems = [
-    { icon: User, path: "/about", label: "About" },
-    { icon: GraduationCap, path: "/education", label: "Education" },
-    { icon: Home, path: "/", label: "Home" },
-    { icon: Briefcase, path: "/experience", label: "Experience" },
-    { icon: Send, path: "/contact", label: "Contact" }
-  ]
-
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white relative overflow-hidden flex">
       <StarryBackground />
@@ -70,30 +52,10 @@ export default function ExperiencePage() {
         </div>
       </div>
 
-      {/* Sidebar Navigation */}
-      <div className="fixed left-0 top-0 h-full w-16 bg-black/20 backdrop-blur-sm border-r border-gray-800 z-20 flex flex-col items-center py-8 gap-6">
-        {navItems.map((item, index) => {
-          const Icon = item.icon
-          const isActive = location.pathname === item.path
-          return (
-            <button
-              key={index}
-              onClick={() => navigate(item.path)}
-              className={`w-10 h-10 flex items-center justify-center rounded-lg transition-all ${
-                isActive 
-                  ? "bg-white/10 text-white" 
-                  : "text-gray-400 hover:text-white hover:bg-white/5"
-              }`}
-              title={item.label}
-            >
-              <Icon className="w-5 h-5" />
-            </button>
-          )
-        })}
-      </div>
+      <SidebarNav />
 
       {/* Main Content */}
-      <div className="flex-1 ml-16 relative z-10">
+      <div className="flex-1 relative z-10">
         <div className="container mx-auto px-8 py-12 max-w-4xl">
           <PageHeader className="mb-12 mt-8" />
 
