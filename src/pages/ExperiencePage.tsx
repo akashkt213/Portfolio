@@ -41,17 +41,6 @@ export default function ExperiencePage() {
     <div className="min-h-screen bg-[#0a0a0a] text-white relative overflow-hidden flex">
       <StarryBackground />
 
-      {/* Decorative element - top right */}
-      <div className="fixed top-0 right-8 z-10">
-        <div className="flex flex-col items-center gap-1">
-          <div className="w-1 h-1 bg-white rounded-full"></div>
-          <div className="w-1 h-1 bg-white rounded-full"></div>
-          <div className="w-1 h-1 bg-white rounded-full"></div>
-          <div className="w-1 h-1 bg-white rounded-full"></div>
-          <div className="w-3 h-3 bg-orange-400 rounded-full"></div>
-        </div>
-      </div>
-
       <SidebarNav />
 
       {/* Main Content */}

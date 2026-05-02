@@ -8,16 +8,25 @@ import {
 import { useNavigate } from "react-router-dom"
 import StarryBackground from "@/components/StarryBackground"
 import PageHeader from "@/components/PageHeader"
+import Chatbot from "@/components/Chatbot"
 
 export default function LandingPage() {
   const navigate = useNavigate()
+
+  const predefinedQuestions = [
+    "Who is Akash?",
+    "How much experience does he have?",
+    "Which technologies does he use?",
+    "What are his skills?",
+    "How can I contact him?"
+  ]
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white relative overflow-hidden">
       <StarryBackground />
 
       {/* Decorative element - top right */}
-      <div className="fixed top-0 right-8 z-10">
+      {/* <div className="fixed top-0 right-8 z-10">
         <div className="flex flex-col items-center gap-1">
           <div className="w-1 h-1 bg-white rounded-full"></div>
           <div className="w-1 h-1 bg-white rounded-full"></div>
@@ -25,7 +34,7 @@ export default function LandingPage() {
           <div className="w-1 h-1 bg-white rounded-full"></div>
           <div className="w-3 h-3 bg-orange-400 rounded-full"></div>
         </div>
-      </div>
+      </div> */}
 
       <div className="relative z-10 container mx-auto px-4 py-12">
         <PageHeader name="Akash Kumar" className="mb-16 mt-8" />
@@ -71,7 +80,7 @@ export default function LandingPage() {
           </Card>
 
           {/* Projects Card */}
-          <Card 
+          {/* <Card 
             className="bg-black/40 backdrop-blur-sm border-gray-800 hover:border-gray-700 transition-all cursor-pointer group"
             onClick={() => navigate('/projects')}
           >
@@ -81,7 +90,7 @@ export default function LandingPage() {
                   <FolderOpen className="w-8 h-8 mb-4 transition-colors group-hover:text-[#ffe0c2]" />
                   <h2 className="text-3xl font-bold mb-2 transition-transform group-hover:scale-98">Projects</h2>
                   <p className="text-gray-400 transition-transform group-hover:scale-98">Personal projects I've been working on.</p>
-                  {/* <div className="flex gap-2 mt-4">
+                  <div className="flex gap-2 mt-4">
                     <div className="w-8 h-8 bg-purple-500/20 border border-purple-500 rounded flex items-center justify-center">
                       <span className="text-xs">🐴</span>
                     </div>
@@ -91,11 +100,11 @@ export default function LandingPage() {
                     <div className="w-8 h-8 bg-red-500/20 border border-red-500 rounded flex items-center justify-center">
                       <span className="text-xs">{}</span>
                     </div>
-                  </div> */}
+                  </div>
                 </div>
               </div>
             </CardContent>
-          </Card>
+          </Card> */}
 
           {/* Contact Card */}
           <Card 
@@ -120,37 +129,8 @@ export default function LandingPage() {
           </Card>
         </div>
 
-        {/* Ask FranckGPT Section */}
-        {/* <div className="max-w-3xl mx-auto">
-          <h2 className="text-2xl font-semibold text-center text-gray-300 mb-6">Ask FranckGPT</h2>
-          
-          <div className="flex flex-wrap gap-3 justify-center mb-6">
-            {predefinedQuestions.map((question, index) => (
-              <Button
-                key={index}
-                variant="outline"
-                className="bg-gray-900/50 border-gray-700 text-white hover:bg-gray-800"
-              >
-                {question}
-              </Button>
-            ))}
-          </div>
-
-          <div className="relative">
-            <Input
-              type="text"
-              placeholder="What would you like to know?"
-              className="w-full h-16 bg-gray-900/50 border-gray-700 text-white placeholder:text-gray-500 pl-12 pr-12 text-lg"
-            />
-            <Mic className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-            <Button
-              size="icon"
-              className="absolute right-2 top-1/2 -translate-y-1/2 bg-orange-500 hover:bg-orange-600"
-            >
-              <Send className="w-5 h-5" />
-            </Button>
-          </div>
-        </div> */}
+        {/* Ask AkashGPT Section */}
+        {/* <Chatbot predefinedQuestsions={predefinedQuestions} /> */}
       </div>
     </div>
   )

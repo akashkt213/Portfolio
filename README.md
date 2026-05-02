@@ -5,6 +5,7 @@ A modern, space-themed portfolio website built with Vite, React, TypeScript, Tai
 ## Features
 
 - **Landing Page**: Beautiful landing page with interactive cards for About, Work Experience, Projects, and Contact
+- **AI Chatbot**: Interactive "Ask AkashGPT" chatbot that answers questions about the portfolio owner using OpenAI
 - **Projects Page**: Dedicated projects page with sidebar navigation
 - **Starry Background**: Animated starry night sky background
 - **Responsive Design**: Fully responsive design that works on all devices
@@ -18,6 +19,7 @@ A modern, space-themed portfolio website built with Vite, React, TypeScript, Tai
 - **shadcn/ui** - Modern UI component library
 - **React Router** - For navigation between pages
 - **Lucide React** - Beautiful icon library
+- **OpenAI API** - For AI-powered chatbot functionality
 
 ## Getting Started
 
@@ -33,12 +35,21 @@ A modern, space-themed portfolio website built with Vite, React, TypeScript, Tai
 npm install
 ```
 
-2. Start the development server:
+2. Set up OpenAI API key (for chatbot feature):
+   - Create a `.env` file in the root directory
+   - Add your OpenAI API key:
+   ```
+   VITE_OPENAI_API_KEY=your_openai_api_key_here
+   ```
+   - Get your API key from: https://platform.openai.com/api-keys
+   - **Note**: The chatbot feature requires a valid OpenAI API key to work
+
+3. Start the development server:
 ```bash
 npm run dev
 ```
 
-3. Open your browser and navigate to `http://localhost:5173`
+4. Open your browser and navigate to `http://localhost:5173`
 
 ### Build for Production
 

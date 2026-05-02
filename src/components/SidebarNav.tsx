@@ -14,9 +14,9 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { icon: FolderOpen, path: "/projects", label: "Projects" },
-  { icon: User, path: "/about", label: "About" },
-  { icon: Home, path: "/", label: "Home" },
+  // { icon: FolderOpen, path: "/projects", label: "Projects" },
+  { icon: User, path: "/", label: "About" },
+  // { icon: Home, path: "/", label: "Home" },
   { icon: Briefcase, path: "/experience", label: "Experience" },
   { icon: Send, path: "/contact", label: "Contact" }
 ]
