@@ -2,24 +2,15 @@ import { Card, CardContent } from "@/components/ui/card"
 import { 
   User, 
   Briefcase, 
-  FolderOpen, 
   Send
 } from "lucide-react"
 import { useNavigate } from "react-router-dom"
 import StarryBackground from "@/components/StarryBackground"
 import PageHeader from "@/components/PageHeader"
-import Chatbot from "@/components/Chatbot"
 
 export default function LandingPage() {
   const navigate = useNavigate()
 
-  const predefinedQuestions = [
-    "Who is Akash?",
-    "How much experience does he have?",
-    "Which technologies does he use?",
-    "What are his skills?",
-    "How can I contact him?"
-  ]
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white relative overflow-hidden">

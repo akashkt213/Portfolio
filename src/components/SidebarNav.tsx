@@ -1,7 +1,5 @@
 import { 
-  FolderOpen,
   User,
-  Home,
   Briefcase,
   Send
 } from "lucide-react"
