@@ -17,6 +17,23 @@ export interface Profile {
   avatar?: string
   /** Path under /public, e.g. "/resume.pdf". */
   resume?: string
+  /** Shows the green "available for work" dot in the hero. */
+  availableForWork: boolean
+  /** IANA timezone for the live local-time clock, e.g. "Asia/Kolkata". */
+  timezone: string
+  /** Short "what I'm doing now" line for the bento grid. */
+  now: string
+}
+
+export const site = {
+  // Used for SEO, sitemap and link previews. Set NEXT_PUBLIC_SITE_URL once you have a custom domain;
+  // on Vercel the production URL is picked up automatically.
+  url:
+    process.env.NEXT_PUBLIC_SITE_URL ??
+    (process.env.VERCEL_PROJECT_PRODUCTION_URL
+      ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+      : "http://localhost:3000"),
+  sourceUrl: "https://github.com/akashkt213",
 }
 
 export interface SocialLink {
@@ -49,6 +66,8 @@ export interface Project {
   /** Path under /public, e.g. "/projects/snippet-vault.png". */
   image?: string
   tags: string[]
+  /** "placeholder" renders a dashed "in the works" card. Remove once the project is real. */
+  status?: "live" | "placeholder"
 }
 
 export const profile: Profile = {
@@ -68,6 +87,9 @@ export const profile: Profile = {
   yearsOfExperience: "2+",
   // TODO: add avatar: "/avatar.jpg" once the photo is in /public
   // TODO: add resume: "/resume.pdf" once the PDF is in /public
+  availableForWork: true,
+  timezone: "Asia/Kolkata",
+  now: "Rebuilding this portfolio in Next.js and writing about what I learn.",
 }
 
 export const email = "akashkt213@gmail.com"
@@ -115,12 +137,25 @@ export const experience: Experience[] = [
   },
 ]
 
-// TODO: add 2–4 more real projects with screenshots and repo links.
+// TODO: replace the placeholder entries with real projects (screenshots go in /public/projects/).
 export const projects: Project[] = [
   {
     title: "Snippet Vault",
     tagline: "Store, organize, and find code snippets fast.",
     liveUrl: "https://snippet-vault-taupe.vercel.app/",
     tags: ["React", "TypeScript", "Tailwind CSS"],
+    status: "live",
+  },
+  {
+    title: "Project Two",
+    tagline: "Placeholder: a one-line description of what it does and who it's for.",
+    tags: ["Next.js", "PostgreSQL"],
+    status: "placeholder",
+  },
+  {
+    title: "Project Three",
+    tagline: "Placeholder: a one-line description of what it does and who it's for.",
+    tags: ["Node.js", "AWS"],
+    status: "placeholder",
   },
 ]
