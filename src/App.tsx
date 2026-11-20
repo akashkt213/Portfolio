@@ -1,49 +1,23 @@
 import { useEffect, useState } from "react"
+import { email, experience, profile, projects, socials, stack } from "./content"
 
 const NAV_ITEMS = ["about", "stack", "experience", "projects", "contact"]
 
-const TECH_STACK = [
-  { category: "Core Frontend", items: ["React", "Next.js", "TypeScript", "Tailwind CSS"] },
-  { category: "State & Data Fetching", items: ["Redux Toolkit", "React Query", "Zustand"] },
-  { category: "UI & Component Systems", items: ["Shadcn UI", "TanStack Table"] },
-  { category: "Backend & APIs", items: ["Node.js", "Express.js", "REST APIs", "Authentication", "Middleware"] },
-  { category: "Databases", items: ["PostgreSQL", "MongoDB", "SQL"] },
-  { category: "Cloud & DevOps", items: ["AWS (EC2, S3, IAM)", "Docker", "CI/CD"] },
-  { category: "Architecture & Tools", items: ["Nx Monorepo", "I18n", "Swagger", "Postman"] },
-  { category: "Mobile Development", items: ["React Native"] },
+const CONTACT_LINKS = [
+  { label: "Email", handle: email, href: `mailto:${email}` },
+  ...socials,
 ]
 
-const EXPERIENCE = [
-  {
-    company: "Datopic",
-    role: "Fullstack Engineer",
-    period: "Feb 2024 – Present",
-    accent: "#ef4444",
-    bullets: [
-      "Integrated Lexical editor for drafting custom email templates and payslips with rich-text editing.",
-      "Participated in focus groups for product development, UX design, and developer tooling improvements.",
-      "Managed application state using Redux and Zustand for scalable and predictable state management.",
-      "Built and integrated REST and GraphQL APIs for efficient data fetching and manipulation.",
-      "Implemented robust form validation using Zod and React Hook Form.",
-      "Worked with Nx monorepos to modularize codebases and manage scalable project structures.",
-      "Developed responsive UI components using Tailwind CSS for consistent design systems.",
-      "Integrated React Big Calendar to display scheduled interviews, holidays, and leave events.",
-      "Implemented I18n for multi-language support and localization across the application.",
-      "Utilized TanStack Table for complex data tables with advanced filtering and sorting.",
-      "Integrated React Query for optimized server-state management, reducing unnecessary API calls.",
-      "Implemented code splitting and lazy loading to improve app performance and reduce initial load time.",
-    ],
-  },
-]
-
-const PROJECTS = [
-  {
-    title: "Snippet Vault",
-    tagline: "Store, organize, and find code snippets fast.",
-    url: "https://snippet-vault-taupe.vercel.app/",
-    tags: ["React", "TypeScript", "Tailwind CSS"],
-  },
-]
+/** Renders **bold** segments of a string as highlighted spans. */
+function Highlighted({ text }: { text: string }) {
+  return (
+    <>
+      {text.split(/\*\*(.+?)\*\*/g).map((part, i) =>
+        i % 2 === 1 ? <span key={i} className="text-[#e8e4dc]">{part}</span> : part
+      )}
+    </>
+  )
+}
 
 function useActiveSection(ids: string[]) {
   const [active, setActive] = useState(ids[0])
@@ -105,7 +79,7 @@ export default function App() {
 
       {/* Mobile top nav */}
       <div className="md:hidden fixed top-0 left-0 right-0 z-40 bg-[#0a0a0a]/90 backdrop-blur border-b border-[#1a1a1a] px-6 py-3 flex items-center justify-between">
-        <span className="text-sm font-semibold tracking-wider">AK</span>
+        <span className="text-sm font-semibold tracking-wider">{profile.initials}</span>
         <button onClick={() => setMenuOpen(!menuOpen)} className="text-xs tracking-widest uppercase text-[#888]">
           {menuOpen ? "close" : "menu"}
         </button>
@@ -125,19 +99,17 @@ export default function App() {
 
         {/* ── ABOUT ── */}
         <section id="about" className="min-h-screen flex flex-col justify-center py-24">
-          <div className="mb-3 text-[#ef4444] text-xs tracking-[0.3em] uppercase">Software Engineer</div>
+          <div className="mb-3 text-[#ef4444] text-xs tracking-[0.3em] uppercase">{profile.role}</div>
           <h1 className="text-6xl md:text-7xl font-bold tracking-tight text-[#f5f0e8] mb-10 leading-none">
-            Akash<br />Kumar
+            {profile.firstName}<br />{profile.lastName}
           </h1>
           <p className="text-[#888] text-base leading-relaxed max-w-lg">
-            I write code. Sometimes it works on the first try — I don't trust those moments.
-            2+ years of turning <span className="text-[#e8e4dc]">React, TypeScript, and Tailwind</span> into
-            interfaces that users click through without filing a bug report.
-            I care about clean code, performance, and not pushing to main on a Friday.
+            <Highlighted text={profile.intro} />
           </p>
           <div className="mt-10 flex gap-8">
-            <a href="https://github.com/akashkt213" target="_blank" rel="noreferrer" className="text-sm tracking-widest uppercase text-[#444] hover:text-[#e8e4dc] transition-colors">GitHub ↗</a>
-            <a href="https://www.linkedin.com/in/akash-kumar142/" target="_blank" rel="noreferrer" className="text-sm tracking-widest uppercase text-[#444] hover:text-[#e8e4dc] transition-colors">LinkedIn ↗</a>
+            {socials.map((s) => (
+              <a key={s.label} href={s.href} target="_blank" rel="noreferrer" className="text-sm tracking-widest uppercase text-[#444] hover:text-[#e8e4dc] transition-colors">{s.label} ↗</a>
+            ))}
           </div>
         </section>
 
@@ -145,7 +117,7 @@ export default function App() {
         <section id="stack" className="py-24">
           <SectionLabel>Tech Stack</SectionLabel>
           <div className="grid grid-cols-1 gap-px bg-[#1a1a1a] border border-[#1a1a1a]">
-            {TECH_STACK.map(({ category, items }) => (
+            {stack.map(({ category, items }) => (
               <div key={category} className="bg-[#0a0a0a] p-6 hover:bg-[#0f0f0f] transition-colors">
                 <div className="text-xs tracking-[0.25em] uppercase text-[#555] mb-4">{category}</div>
                 <div className="flex flex-wrap gap-2">
@@ -166,12 +138,12 @@ export default function App() {
         {/* ── EXPERIENCE ── */}
         <section id="experience" className="py-24">
           <SectionLabel>Experience</SectionLabel>
-          {EXPERIENCE.map((exp) => (
+          {experience.map((exp) => (
             <div key={exp.company} className="mb-16">
               <div className="flex items-center gap-3 mb-4">
                 <span
                   className="text-sm font-bold tracking-wider uppercase px-3 py-1"
-                  style={{ background: exp.accent, color: "#fff" }}
+                  style={{ background: "#ef4444", color: "#fff" }}
                 >
                   {exp.company}
                 </span>
@@ -182,7 +154,7 @@ export default function App() {
                 <span className="text-sm text-[#555] tracking-wider">{exp.period}</span>
               </div>
               <ul className="space-y-4">
-                {exp.bullets.map((b, i) => (
+                {[...exp.highlights, ...exp.details].map((b, i) => (
                   <li key={i} className="flex gap-3 text-base text-[#666] leading-relaxed group">
                     <span className="text-[#2a2a2a] group-hover:text-[#ef4444] transition-colors mt-0.5 shrink-0">–</span>
                     <span className="group-hover:text-[#888] transition-colors">{b}</span>
@@ -197,10 +169,10 @@ export default function App() {
         <section id="projects" className="py-24">
           <SectionLabel>Projects</SectionLabel>
           <div className="space-y-px border border-[#1a1a1a]">
-            {PROJECTS.map((p) => (
+            {projects.map((p) => (
               <a
                 key={p.title}
-                href={p.url}
+                href={p.liveUrl ?? p.repoUrl}
                 target="_blank"
                 rel="noreferrer"
                 className="group block bg-[#0a0a0a] hover:bg-[#0f0f0f] p-7 transition-colors"
@@ -233,11 +205,7 @@ export default function App() {
             Open to new opportunities, collaborations, or just a good conversation about tech.
           </p>
           <div className="space-y-4">
-            {[
-              { label: "Email", value: "akashkt213@gmail.com", href: "mailto:akashkt213@gmail.com" },
-              { label: "GitHub", value: "akashkt213", href: "https://github.com/akashkt213" },
-              { label: "LinkedIn", value: "akash-kumar142", href: "https://www.linkedin.com/in/akash-kumar142/" },
-            ].map((link) => (
+            {CONTACT_LINKS.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
@@ -246,7 +214,7 @@ export default function App() {
                 className="flex items-center gap-5 group"
               >
                 <span className="text-xs tracking-[0.25em] uppercase text-[#333] w-20 shrink-0">{link.label}</span>
-                <span className="text-base text-[#555] group-hover:text-[#e8e4dc] transition-colors">{link.value}</span>
+                <span className="text-base text-[#555] group-hover:text-[#e8e4dc] transition-colors">{link.handle}</span>
                 <span className="text-[#222] group-hover:text-[#ef4444] transition-colors text-sm">↗</span>
               </a>
             ))}
