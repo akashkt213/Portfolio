@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
+import { Caveat, Geist, Geist_Mono, Silkscreen } from "next/font/google"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { profile, site, socials } from "@/content"
@@ -7,6 +7,8 @@ import "./globals.css"
 
 const sans = Geist({ subsets: ["latin"], variable: "--font-geist-sans" })
 const mono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono" })
+const pixel = Silkscreen({ subsets: ["latin"], weight: "400", variable: "--font-silkscreen" })
+const hand = Caveat({ subsets: ["latin"], weight: ["500", "600"], variable: "--font-caveat" })
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -38,7 +40,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${sans.variable} ${mono.variable}`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${sans.variable} ${mono.variable} ${hand.variable} ${pixel.variable}`}>
       <body className="min-h-dvh">
         <a
           href="#main"

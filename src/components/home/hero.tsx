@@ -1,23 +1,12 @@
 import { LiveClock } from "@/components/live-clock"
+import { NoteWall } from "@/components/note-wall"
 import { ScrambleText } from "@/components/scramble-text"
 import { profile, socials } from "@/content"
 
-/** Renders `**highlighted**` phrases from content.ts in the foreground color. */
-function Emphasis({ text }: { text: string }) {
-  return text.split(/\*\*(.+?)\*\*/g).map((part, i) =>
-    i % 2 === 1 ? (
-      <span key={i} className="text-fg">
-        {part}
-      </span>
-    ) : (
-      part
-    ),
-  )
-}
-
 export function Hero() {
   return (
-    <section className="flex min-h-dvh flex-col justify-center pb-16 pt-28">
+    <section className="grid min-h-dvh grid-cols-1 content-center gap-16 pb-16 pt-28 lg:grid-cols-[minmax(0,1fr)_380px] lg:items-center lg:gap-12">
+      <div>
       <p className="mb-5 font-mono text-xs uppercase tracking-label text-accent">{profile.role}</p>
 
       <h1 className="mb-8 font-mono text-[clamp(3rem,12vw,7.5rem)] font-bold leading-[0.9] tracking-tighter">
@@ -27,8 +16,17 @@ export function Hero() {
         </span>
       </h1>
 
-      <p className="mb-10 max-w-xl text-lg leading-relaxed text-muted">
-        <Emphasis text={profile.intro} />
+      <p className="mb-4 max-w-xl font-pixel text-xl leading-snug text-fg sm:text-2xl">
+        <span aria-hidden className="mr-3 text-accent">&gt;</span>
+        {profile.intro}
+      </p>
+      <p className="mb-10 font-mono text-sm text-muted">
+        {profile.focus.map((item, i) => (
+          <span key={item}>
+            {i > 0 && <span aria-hidden className="mx-2 text-subtle">·</span>}
+            {item}
+          </span>
+        ))}
       </p>
 
       <div className="mb-12 flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-xs text-subtle">
@@ -73,6 +71,9 @@ export function Hero() {
           </li>
         )}
       </ul>
+      </div>
+
+      <NoteWall />
     </section>
   )
 }

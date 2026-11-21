@@ -10,8 +10,10 @@ export interface Profile {
   location?: string
   /** One-line pitch, used for meta description / link previews. */
   pitch: string
-  /** Longer intro paragraph shown in the hero. Wrap highlighted phrases in **double asterisks**. */
+  /** One short line shown in the pixel font under the name. Keep it under ~40 characters. */
   intro: string
+  /** A few keywords shown under the intro, separated by dots. */
+  focus: string[]
   yearsOfExperience: string
   /** Path under /public, e.g. "/avatar.jpg". */
   avatar?: string
@@ -79,11 +81,8 @@ export const profile: Profile = {
   // TODO: add location (e.g. "Bengaluru, India")
   pitch:
     "Full-stack engineer building fast, scalable React and TypeScript web apps.",
-  intro:
-    "I write code. Sometimes it works on the first try — I don't trust those moments. " +
-    "2+ years of turning **React, TypeScript, and Tailwind** into interfaces that users click " +
-    "through without filing a bug report. I care about clean code, performance, and not pushing " +
-    "to main on a Friday.",
+  intro: "I build fast, clean web apps.",
+  focus: ["Full-stack", "React", "TypeScript", "Node.js"],
   yearsOfExperience: "2+",
   // TODO: add avatar: "/avatar.jpg" once the photo is in /public
   // TODO: add resume: "/resume.pdf" once the PDF is in /public

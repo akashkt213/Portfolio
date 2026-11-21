@@ -23,6 +23,8 @@
 @theme inline {
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-hand: var(--font-caveat), "Segoe Print", "Bradley Hand", cursive;
+  --font-pixel: var(--font-silkscreen), var(--font-geist-mono), monospace;
 }
 
 @layer base {
@@ -103,6 +105,153 @@
   .caret::after { animation: blink 1.1s steps(1) infinite; }
 }
 @keyframes blink { 50% { opacity: 0; } }
+
+/* ── The wall: visitor sticky notes ─────────────────────────
+   Structure: .note-wrap (tilt; creates the stacking context)
+              └ .note (paper) with ::after as the lifted-corner shadow
+   The shadow sits at z-index -1 inside .note-wrap, so it renders behind
+   the paper but in front of the board.                                 */
+.wall {
+  --wall-bg: #141414;
+  position: relative;
+  border: 1px solid var(--color-line);
+  background-color: var(--wall-bg);
+  background-image: radial-gradient(rgb(255 255 255 / 0.06) 1px, transparent 1px);
+  background-size: 14px 14px;
+  padding: 1.25rem;
+}
+
+.note-yellow { --paper: #fbe96a; }
+.note-pink   { --paper: #ff8fc4; }
+.note-orange { --paper: #ffb457; }
+.note-blue   { --paper: #6fd4f6; }
+
+.note-wrap {
+  --r: 0deg;
+  --y: 0px;
+  position: relative;
+  /* Hinged at the top like real adhesive; the bottom tips toward the viewer. */
+  transform-origin: 50% 0;
+  transform: perspective(600px) translateY(var(--y)) rotate(var(--r)) rotateX(7deg);
+  transition: transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.note-wrap:hover {
+  z-index: 2;
+  transform: perspective(600px) translateY(calc(var(--y) - 4px)) rotate(calc(var(--r) * 0.4)) rotateX(14deg) scale(1.04);
+}
+
+.note {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  color: #2a2414;
+  /* Flat adhesive strip at the top, slight darkening where the paper lifts off at the bottom. */
+  background:
+    linear-gradient(to bottom, rgb(0 0 0 / 0.07), transparent 14%),
+    linear-gradient(to bottom, transparent 62%, rgb(0 0 0 / 0.1)),
+    var(--paper);
+  /* Curled bottom-right corner. */
+  border-bottom-right-radius: 50% 7%;
+  box-shadow:
+    inset 0 -1px 0 rgb(255 255 255 / 0.25),
+    0 1px 1px rgb(0 0 0 / 0.35);
+}
+.note-wrap > .note {
+  aspect-ratio: 1;
+  padding: 0.7rem 0.75rem 0.5rem;
+  min-height: 0; /* keep the square even if text is long */
+}
+/* Lifted-corner shadow: offset down and skewed toward the curled corner. */
+.note-wrap > .note::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 10%;
+  right: 4%;
+  bottom: 10px;
+  height: 40%;
+  box-shadow: 0 14px 14px rgb(0 0 0 / 0.85);
+  transform: skewX(-6deg) rotate(2.5deg);
+  transform-origin: right bottom;
+  transition: box-shadow 300ms;
+}
+.note-wrap:hover > .note::after {
+  box-shadow: 0 22px 20px rgb(0 0 0 / 0.9);
+}
+
+.note-text {
+  flex: 1;
+  font-family: var(--font-hand);
+  font-size: 1.2rem;
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+  min-height: 0;
+  overflow: hidden;
+}
+.note-text-md { font-size: 1.05rem; }
+.note-text-sm { font-size: 0.95rem; line-height: 1.05; }
+.note-meta {
+  margin-top: 0.25rem;
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.05em;
+  color: rgb(0 0 0 / 0.5);
+}
+
+.note-composer {
+  padding: 0.85rem 0.9rem 0.6rem;
+  transform: rotate(-0.6deg);
+  box-shadow: 0 18px 24px -10px rgb(0 0 0 / 0.9), 0 1px 1px rgb(0 0 0 / 0.35);
+}
+.note-composer .note-text {
+  font-size: 1.45rem;
+}
+
+.note-blank {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  border: 1.5px dashed var(--color-line-strong);
+  padding: 0.85rem;
+  font-family: var(--font-hand);
+  font-size: 1.35rem;
+  color: var(--color-muted);
+  transition: color 200ms, border-color 200ms, background-color 200ms;
+}
+.note-blank:hover {
+  border-color: #fbe96a;
+  color: #fbe96a;
+  background-color: rgb(251 233 106 / 0.04);
+}
+
+.swatch {
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 9999px;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.25);
+}
+
+.note-skeleton {
+  aspect-ratio: 1;
+  border: 1px dashed var(--color-line);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .note-fresh { animation: stick 500ms cubic-bezier(0.2, 0.9, 0.3, 1.3) both; }
+  .note-skeleton { animation: pulse 1.6s ease-in-out infinite; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .note-wrap, .note-wrap:hover { transition: none; }
+}
+@keyframes stick {
+  from { opacity: 0; transform: perspective(600px) translateY(-18px) rotate(calc(var(--r) - 8deg)) rotateX(30deg) scale(1.15); }
+}
+@keyframes pulse { 50% { opacity: 0.4; } }
 
 /* ── Blog post typography ──────────────────────────────────── */
 .prose {
