@@ -1,0 +1,37 @@
+export const metadata = {
+  title: "Hello, world (again)",
+  date: "2026-11-21",
+  summary: "Why I rebuilt my portfolio in Next.js, and what this blog is for.",
+  tags: ["meta", "nextjs"],
+}
+
+This is a sample post so the blog has something to show. Replace it with your first real post,
+or delete this file once you've written one.
+
+## Writing a post
+
+Create a new `.mdx` file in `src/posts/`. The file name becomes the URL, so
+`src/posts/react-query-tips.mdx` is served at `/blog/react-query-tips`.
+
+Start the file with its metadata:
+
+```ts
+export const metadata = {
+  title: "Five React Query patterns I use every day",
+  date: "2026-12-01",
+  summary: "One sentence that shows up on the blog index and in link previews.",
+  tags: ["react", "react-query"],
+  draft: true, // hidden in production until you remove this
+}
+```
+
+Everything below is regular Markdown: **bold**, _italics_, [links](/#contact), lists, tables and
+code blocks with syntax highlighting.
+
+| Feature            | Supported |
+| ------------------ | --------- |
+| GitHub-style tables | yes       |
+| Code highlighting  | yes       |
+| React components   | yes       |
+
+> Tip: keep posts short and specific. "How I cut our bundle size by 40%" beats "Thoughts on performance".
