@@ -20,7 +20,7 @@ export default async function HomePage() {
       <About latestPost={posts[0]} />
       <Experience />
       <Projects />
-      <Writing posts={posts.slice(0, 3)} />
+      {/* <Writing posts={posts.slice(0, 3)} /> */}
       <Contact />
     </div>
   )
