@@ -2,7 +2,7 @@ import Link from "next/link"
 import { Section } from "@/components/section"
 import { SpotlightCard } from "@/components/spotlight-card"
 import { experience, profile, stack } from "@/content"
-import type { Post } from "@/lib/blog"
+import { BLOG_ENABLED, type Post } from "@/lib/blog"
 
 const tileLabel = "mb-4 font-mono text-[11px] uppercase tracking-label text-subtle"
 
@@ -57,12 +57,13 @@ export function About({ latestPost }: { latestPost?: Post }) {
         )}
 
         {/* Now */}
-        <SpotlightCard className="reveal p-6 sm:col-span-2 lg:col-span-1">
+        <SpotlightCard className={`reveal p-6 sm:col-span-2 ${BLOG_ENABLED ? "lg:col-span-1" : ""}`}>
           <p className={tileLabel}>Now</p>
           <p className="text-sm leading-relaxed text-muted">{profile.now}</p>
         </SpotlightCard>
 
         {/* Latest writing */}
+        {BLOG_ENABLED && (
         <SpotlightCard className="reveal p-6 sm:col-span-2 lg:col-span-1">
           <p className={tileLabel}>Latest writing</p>
           {latestPost ? (
@@ -78,6 +79,7 @@ export function About({ latestPost }: { latestPost?: Post }) {
             <p className="text-sm text-muted">First post coming soon.</p>
           )}
         </SpotlightCard>
+        )}
       </div>
     </Section>
   )

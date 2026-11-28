@@ -3,6 +3,7 @@ import { Caveat, Geist, Geist_Mono, Silkscreen } from "next/font/google"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { profile, site, socials } from "@/content"
+import { BLOG_ENABLED } from "@/lib/blog"
 import "./globals.css"
 
 const sans = Geist({ subsets: ["latin"], variable: "--font-geist-sans" })
@@ -29,9 +30,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     creator: `@${socials.find((s) => s.label === "X")?.handle ?? ""}`,
   },
-  alternates: {
-    types: { "application/rss+xml": "/rss.xml" },
-  },
+  ...(BLOG_ENABLED ? { alternates: { types: { "application/rss+xml": "/rss.xml" } } } : {}),
 }
 
 export const viewport: Viewport = {

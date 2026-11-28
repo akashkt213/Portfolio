@@ -2,6 +2,9 @@ import fs from "node:fs"
 import path from "node:path"
 import type { ComponentType } from "react"
 
+/** Hides the blog everywhere (routes 404, links, sitemap, RSS). Flip to true to bring it back. */
+export const BLOG_ENABLED = false
+
 /**
  * Blog posts are MDX files in src/posts/. Each one exports its metadata:
  *

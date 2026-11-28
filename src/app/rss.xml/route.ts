@@ -1,5 +1,5 @@
 import { profile, site } from "@/content"
-import { getPosts } from "@/lib/blog"
+import { BLOG_ENABLED, getPosts } from "@/lib/blog"
 
 export const dynamic = "force-static"
 
@@ -7,6 +7,7 @@ const escape = (s: string) =>
   s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;")
 
 export async function GET() {
+  if (!BLOG_ENABLED) return new Response("Not found", { status: 404 })
   const posts = await getPosts()
   const items = posts
     .map(
